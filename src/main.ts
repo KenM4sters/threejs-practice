@@ -14,15 +14,6 @@ const gui: GUI = new GUI()
 // Canvas
 const canvas: HTMLElement = document.getElementById('webgl')
 
-// test
-// const test: HTMLElement = document.getElementById("test");
-
-// window.addEventListener("mousemove", (mouse) => {
-//     test.style.transform = `translateX(${mouse.clientX}px) translateY(${mouse.clientY}px)` 
-
-// })
-
-
 
 // Scene
 const scene: THREE.Scene = new THREE.Scene()
@@ -164,7 +155,7 @@ window.addEventListener('resize', () =>
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.x = 3.0
+camera.position.x = 0.0
 camera.position.y = 1.0
 camera.position.z = 30.0
 scene.add(camera)
@@ -181,7 +172,7 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.setClearColor( 0x0000, 1.0);
+renderer.setClearColor( 0x0000, 0.95);
 
 /**
  * Generate the first galaxy
@@ -192,6 +183,31 @@ generateGalaxy()
  * Animate
  */
 const clock = new THREE.Clock()
+
+
+// test
+// const test: HTMLElement = document.getElementById("test");
+
+// window.addEventListener("mousemove", (mouse) => {
+//     test.style.transform = `translateX(${mouse.clientX}px) translateY(${mouse.clientY}px)` 
+
+// })
+const x: number = 40;
+const y: number = 198;
+
+const resume_button: HTMLElement = document.getElementById("resume");
+resume_button.style.transform = `translateX(${-x}vw) translateY(${-y}px)`
+
+const github_button: HTMLElement = document.getElementById("github");
+github_button.style.transform = `translateX(${x}vw) translateY(${-y - 200}px)`
+
+const opengl_button: HTMLElement = document.getElementById("openglvideo");
+
+opengl_button.addEventListener("mouseenter", event => {
+    console.log("entered")
+    opengl_button.classList.remove("item-closed")
+    opengl_button.classList.add("item-open")
+})
 
 const tick = () =>
 {
