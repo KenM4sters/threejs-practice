@@ -9,6 +9,7 @@ import { Parameters } from './types'
 import { UnrealBloomPass } from 'three/examples/jsm/Addons.js'
 import { GlitchPass } from 'three/examples/jsm/Addons.js'
 import { GammaCorrectionShader } from 'three/examples/jsm/Addons.js'
+import { log } from 'three/examples/jsm/nodes/Nodes.js'
 
 /**
  * Base
@@ -27,14 +28,14 @@ const scene: THREE.Scene = new THREE.Scene()
  * Galaxy
  */
 const parameters = {} as Parameters;
-parameters.count = 50000
+parameters.count = 20000
 parameters.size = 10.0
-parameters.radius = 40.0
+parameters.radius = 10.0
 parameters.branches = 5
 parameters.spin = 1
 parameters.randomness = 5.0
 parameters.randomnessPower = 1.70
-parameters.insideColor = '#5e30eb'
+parameters.insideColor = '#d95000'
 parameters.outsideColor = '#00a3d7'
 
 let geometry = null
@@ -160,9 +161,9 @@ window.addEventListener('resize', () =>
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.x = -20.0
+camera.position.x = -0.0
 camera.position.y = -0.0
-camera.position.z = 10.0
+camera.position.z = 15.0
 camera.rotateZ(-75)
 scene.add(camera)
 
@@ -182,7 +183,6 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.setClearColor(0x000000);
 
 /**
  * Generate the first galaxy
@@ -211,6 +211,8 @@ window.addEventListener("mousemove", (mouse) => {
     opengl_video.style.transform = `translateX(${mouse.clientX + 50}px) translateY(${mouse.clientY + 300}px)`
     vulkan_video.style.transform = `translateX(${mouse.clientX + 50}px) translateY(${mouse.clientY + 300}px)`
     api_image.style.transform = `translateX(${mouse.clientX + 50}px) translateY(${mouse.clientY + 300}px)`
+
+    
 });
 
 opengl_button.addEventListener("mouseenter", event => {

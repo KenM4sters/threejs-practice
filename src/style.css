@@ -34,10 +34,29 @@ body {
     -webkit-text-stroke-width: 1px;
 }
 
-#aboutme {
-    background-image: linear-gradient(60deg, #9ca8ba, #4400aa);
+#about-me-title {
+    background-image: linear-gradient(60deg, #9ca8ba, #cd770e);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+#opengl-button {
+    background-image: linear-gradient(60deg, #9ca8ba, #ff9100);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#vulkan-button {
+    background-image: linear-gradient(60deg, #9ca8ba, #e11d1d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#api-button {
+    background-image: linear-gradient(60deg, #9ca8ba, #0aa2d0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#about-me-description {
+    color: #c5cbdb;
 }
 
 .item-open {
