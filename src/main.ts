@@ -3,7 +3,12 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import GUI from 'lil-gui'
 import galaxyVertexShader from "./shaders/galaxy/vertex.glsl?raw"
 import galaxyFragmentShader from "./shaders/galaxy/fragment.glsl?raw"
+import { EffectComposer, ShaderPass } from 'three/examples/jsm/Addons.js'
+import { RenderPass } from 'three/examples/jsm/Addons.js'
 import { Parameters } from './types'
+import { UnrealBloomPass } from 'three/examples/jsm/Addons.js'
+import { GlitchPass } from 'three/examples/jsm/Addons.js'
+import { GammaCorrectionShader } from 'three/examples/jsm/Addons.js'
 
 /**
  * Base
@@ -22,15 +27,15 @@ const scene: THREE.Scene = new THREE.Scene()
  * Galaxy
  */
 const parameters = {} as Parameters;
-parameters.count = 400000
-parameters.size = 0.005
+parameters.count = 50000
+parameters.size = 10.0
 parameters.radius = 40.0
 parameters.branches = 5
 parameters.spin = 1
 parameters.randomness = 5.0
 parameters.randomnessPower = 1.70
-parameters.insideColor = '#a96800'
-parameters.outsideColor = '#1b3984'
+parameters.insideColor = '#5e30eb'
+parameters.outsideColor = '#00a3d7'
 
 let geometry = null
 let material = null
@@ -155,10 +160,15 @@ window.addEventListener('resize', () =>
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.x = 0.0
-camera.position.y = 1.0
-camera.position.z = 30.0
+camera.position.x = -20.0
+camera.position.y = -0.0
+camera.position.z = 10.0
+camera.rotateZ(-75)
 scene.add(camera)
+
+// Lighting
+// const light = new THREE.AmbientLight( 0x404040, 100 ); // soft white light
+// scene.add( light );
 
 // Controls
 // const controls = new OrbitControls(camera, canvas)
@@ -172,7 +182,7 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.setClearColor( 0x0000, 0.95);
+renderer.setClearColor(0x000000);
 
 /**
  * Generate the first galaxy
@@ -184,30 +194,80 @@ generateGalaxy()
  */
 const clock = new THREE.Clock()
 
+// const resume_button: HTMLElement = document.getElementById("resume");
+// resume_button.style.transform = `translateX(${-x}vw) translateY(${-y}px)`
 
-// test
-// const test: HTMLElement = document.getElementById("test");
+// const github_button: HTMLElement = document.getElementById("github");
+// github_button.style.transform = `translateX(${x}vw) translateY(${-y - 200}px)`
 
-// window.addEventListener("mousemove", (mouse) => {
-//     test.style.transform = `translateX(${mouse.clientX}px) translateY(${mouse.clientY}px)` 
+const opengl_button: HTMLElement = document.getElementById("opengl-button");
+const vulkan_button: HTMLElement = document.getElementById("vulkan-button");
+const api_button: HTMLElement = document.getElementById("api-button");
+const opengl_video: HTMLElement = document.getElementById("opengl-video");
+const vulkan_video: HTMLElement = document.getElementById("vulkan-video");
+const api_image: HTMLElement = document.getElementById("api-image");
 
-// })
-const x: number = 40;
-const y: number = 198;
-
-const resume_button: HTMLElement = document.getElementById("resume");
-resume_button.style.transform = `translateX(${-x}vw) translateY(${-y}px)`
-
-const github_button: HTMLElement = document.getElementById("github");
-github_button.style.transform = `translateX(${x}vw) translateY(${-y - 200}px)`
-
-const opengl_button: HTMLElement = document.getElementById("openglvideo");
+window.addEventListener("mousemove", (mouse) => {
+    opengl_video.style.transform = `translateX(${mouse.clientX + 50}px) translateY(${mouse.clientY + 300}px)`
+    vulkan_video.style.transform = `translateX(${mouse.clientX + 50}px) translateY(${mouse.clientY + 300}px)`
+    api_image.style.transform = `translateX(${mouse.clientX + 50}px) translateY(${mouse.clientY + 300}px)`
+});
 
 opengl_button.addEventListener("mouseenter", event => {
     console.log("entered")
-    opengl_button.classList.remove("item-closed")
-    opengl_button.classList.add("item-open")
+    opengl_video.classList.remove("item-closed")
+    opengl_video.classList.add("item-open")
 })
+
+opengl_button.addEventListener("mouseleave", event => {
+    opengl_video.classList.remove("item-open")
+    opengl_video.classList.add("item-closed")
+})
+
+vulkan_button.addEventListener("mouseenter", event => {
+    console.log("entered")
+    vulkan_video.classList.remove("item-closed")
+    vulkan_video.classList.add("item-open")
+})
+
+vulkan_button.addEventListener("mouseleave", event => {
+    vulkan_video.classList.remove("item-open")
+    vulkan_video.classList.add("item-closed")
+})
+
+api_button.addEventListener("mouseenter", event => {
+    console.log("entered")
+    api_image.classList.remove("item-closed")
+    api_image.classList.add("item-open")
+})
+
+api_button.addEventListener("mouseleave", event => {
+    api_image.classList.remove("item-open")
+    api_image.classList.add("item-closed")
+})
+
+// Post Processing
+
+const effectComposer: EffectComposer = new EffectComposer(renderer);
+effectComposer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+effectComposer.setSize(sizes.width, sizes.height);
+
+const renderPass = new RenderPass(scene, camera);
+effectComposer.addPass(renderPass);
+
+const bloomPass = new UnrealBloomPass(new THREE.Vector2(sizes.width, sizes.height), 1.0, 1.0, 0.0);
+effectComposer.addPass(bloomPass);
+
+// const glitchPass = new GlitchPass();
+// effectComposer.addPass(glitchPass);
+
+// Must be called last
+const gammaCorrectionShader = new ShaderPass(GammaCorrectionShader);
+effectComposer.addPass(gammaCorrectionShader);
+
+
+
+
 
 const tick = () =>
 {
@@ -220,8 +280,8 @@ const tick = () =>
     // controls.update()
 
     // Render
-    renderer.render(scene, camera)
-
+    // renderer.render(scene, camera)
+    effectComposer.render();
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)

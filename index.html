@@ -6,47 +6,50 @@
     <title>18 - Particles</title>
     <link rel="stylesheet" href="./src/style.css">
 </head>
-<body>
+<body class="">
     <canvas class="fixed" id="webgl"></canvas>
-    <div class=" relative h-[300vh] flex flex-col justify-around items-center">
-        <h1 id="test" class=" fill-none outline-orange-400 font-semibold text-[3rem] ">Hi.</h1>
-        <h1 id="aboutme" class="text-[3rem] fill-transparent  ">About me</h1>
-        <p class="text-[1.4rem] text-gray-300 text-center ">
-            <strong>Hi!</strong> 
-            My name is <strong>Samuel Brookman</strong>, and I'm an aspiring software developer  
-            looking to implement<br> my skills into the real world.
-            I have a passion for <strong>low level programming</strong> in <strong class="">C++</strong> and enjoy<br>
-            exploring the fields of computer graphics and <strong class="">machine learning</strong>. 
-        </p>
-        <a id="contact" href="mailto: sam.brookman414@hotmail.com" class=" italic "> Contact </a>
-        <a id="resume" href="/" download="/CV.pdf" class=" relative italic  "> Resume </a>
-        <a id="github" href="https://github.com/KenM4sters" target="_blank" class=" relative italic"> Github </a>
-
-        <div class="text-white font-semibold text-[3rem] flex flex-col gap-y-[5vh] text-center ">
-            <a href="#">OpenGL, C</a>
-            <a href="#">Vulkan</a>
-            <a href="#">API</a>
+    <section class="relative">
+        <div class="relative">
+            <video muted width="300" height="100" autoplay loop playsinline disablepictureinpicture
+                class="item-closed" id="opengl-video">
+                <source src="/game_demo.mp4" type="video/mp4"/>
+            </video>
+            <video muted width="300" height="100" autoplay loop playsinline disablepictureinpicture
+                class="item-closed" id="vulkan-video">
+                <source src="/engine_mkvi_demo.mov" type="video/mp4"/>
+            </video>
+            <img height="100" width="300" alt="" src="/api.png" class="item-closed" id="api-image"/>
         </div>
-        <video muted width="300" height="100" autoplay loop playsinline disablepictureinpicture
-        class="item-closed" id="openglvideo"
-        >
-            <source src="/public/game_demo.mp4" type="video/mp4"/>
-        </video>
-        <video muted width="300" height="100" autoplay loop playsinline disablepictureinpicture
-        class="item-open" id="vulkan-video"
-        >
-            <source src="/public/engine_mkvi_demo.mov" type="video/mp4"/>
-        </video>
-        <img height="100" width="300" alt="" src="/public/api.png" class="item-open" id="api-image"/>
-
-        <div class="flex justify-center gap-x-[10vw]">
-            <h1 class="text-white text-[3rem]">contact</h1>
-            <div class="w-[30vw] h-[20vh] border border-white flex flex-col gap-y-[5vh]">
-                <input placeholder="johndoe@hotmail.com" type="email" />
-                <textarea placeholder="How can I help?"></textarea>
+        <div class=" h-[200vh] flex flex-col justify-around ml-[10vw]  ">
+            <h1 id="aboutme" class="text-[3rem] fill-transparent  ">About me</h1>
+            <p class="text-[1.4rem] text-gray-300 ">
+                <strong>Hi!</strong> 
+                My name is <strong>Samuel Brookman</strong>, and I'm an aspiring software developer  
+                looking to implement<br> my skills into the real world.
+                I have a passion for <strong>low level programming</strong> in <strong class="">C++</strong> and enjoy<br>
+                exploring the fields of computer graphics and <strong class="">machine learning</strong>. 
+            </p>
+            <div>
+                <a id="contact" href="mailto: sam.brookman414@hotmail.com" class=" absolute italic "> Contact </a>
+                <a id="resume" href="/" download="/CV.pdf" class=" absolute italic  "> Resume </a>
+                <a id="github" href="https://github.com/KenM4sters" target="_blank" class=" absolute italic"> Github </a>
+            </div>
+    
+            <div class="text-white font-semibold text-[3rem] flex flex-col gap-y-[5vh] w-[20vw] text-center">
+                <a id="opengl-button" href="#" class="">OpenGL, C</a>
+                <a id="vulkan-button" href="#" class="">Vulkan</a>
+                <a id="api-button" href="#" class="">API</a>
+            </div>
+            
+            <div class="flex justify-center gap-x-[10vw]">
+                <h1 class="text-white text-[3rem]">contact</h1>
+                <div class="w-[30vw] h-[20vh] border border-white flex flex-col gap-y-[5vh]">
+                    <input placeholder="johndoe@hotmail.com" type="email" />
+                    <textarea placeholder="How can I help?"></textarea>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
     <script type="module" src="./src/main.ts"></script>
 </body>
 </html>
