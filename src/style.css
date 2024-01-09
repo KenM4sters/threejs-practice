@@ -1,30 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Genos:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+
+
+
 body {
     background: linear-gradient(120deg, rgb(21, 23, 28) 0%, rgba(11,18,31,1) 51%, rgba(5,1,22,1) 100%);
     scroll-behavior: smooth;
+    font-family: 'Genos', sans-serif;
     
 }
 
-#test {
-    font-size: 100px;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke-color: aquamarine;
-    -webkit-text-stroke-width: 1px;
-}
+
 #resume {
     font-size: 75px;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-color: #656b75;
     -webkit-text-stroke-width: 1px;
+    font-family: 'Bebas Neue', 'sans serif';
 }
 #contact {
     font-size: 75px;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-color: #656b75;
     -webkit-text-stroke-width: 1px;
+    font-family: 'Bebas Neue', 'sans serif';
     
 }
 #github {
@@ -32,39 +35,56 @@ body {
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-color: #656b75;
     -webkit-text-stroke-width: 1px;
+    font-family: 'Bebas Neue', 'sans serif';
 }
 
 #about-me-title {
-    background-image: linear-gradient(60deg, #9ca8ba, #cd770e);
+    background-image: linear-gradient(60deg, #cfdff7, #cd770e);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 #opengl-button {
-    background-image: linear-gradient(60deg, #9ca8ba, #ff9100);
-    -webkit-background-clip: text;
+    font-size: 9rem;
     -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: #656b75;
+    -webkit-text-stroke-width: 1px;
+    font-family: 'Bebas Neue', 'sans serif';
 }
 #vulkan-button {
-    background-image: linear-gradient(60deg, #9ca8ba, #e11d1d);
-    -webkit-background-clip: text;
+    font-size: 9rem;
     -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: #656b75;
+    -webkit-text-stroke-width: 1px;
+    font-family: 'Bebas Neue', 'sans serif';
 }
 #api-button {
-    background-image: linear-gradient(60deg, #9ca8ba, #0aa2d0);
-    -webkit-background-clip: text;
+    font-size: 9rem;
     -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: #656b75;
+    -webkit-text-stroke-width: 1px;
+    font-family: 'Bebas Neue', 'sans serif';
 }
 
 #about-me-description {
-    color: #c5cbdb;
+    color: #c5cbdb; 
+
+
 }
 
 .item-open {
     visibility: visible;
     position: absolute;
+    transition: all;
 }
 
 .item-closed {
     visibility: hidden;
     position: absolute;
+    transition: all;
+}
+
+#skills-box {
+    /*https://getcssscan.com/css-box-shadow-examples*/
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    /* background-color: rgba(1.0, 1.0, 10.0, 0.8); */
 }

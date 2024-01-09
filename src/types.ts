@@ -1,5 +1,5 @@
 export type Parameters = {
-    count: number;
+    galaxyCount: number;
     size: number;
     radius: number;
     branches: number;
@@ -8,4 +8,9 @@ export type Parameters = {
     randomnessPower: number;
     insideColor: string;
     outsideColor: string;
+    bloomStrength: number;
+    bloomRadius: number;
+    bloomThreshold: number;
+
+    freeParticlesCount: number;
 }

@@ -16,7 +16,7 @@ void main()
     // Rotate
     float angle = atan(modelPosition.x, modelPosition.z);
     float distanceToCenter = length(modelPosition.xz);
-    float angleOffset = (1.0 / distanceToCenter) * (uTime * 0.2);
+    float angleOffset = (1.0 / (distanceToCenter)) * (uTime * 0.5);
     angle += angleOffset;
     modelPosition.x = cos(angle) * distanceToCenter;
     modelPosition.z = sin(angle) * distanceToCenter;
@@ -31,7 +31,7 @@ void main()
     /**
      * Size
      */
-    gl_PointSize = uSize * aScale;
+    gl_PointSize = uSize;
     gl_PointSize *= (1.0 / - viewPosition.z);
 
     /**
